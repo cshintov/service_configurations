@@ -1,0 +1,24 @@
+{
+    "users": [
+        {
+            "user_name": "user_1",
+            "role": "admin",
+            "ssh_key": "ssh-rsa [shortened]"
+        },
+        {
+            "user_name": "user_2",
+            "role": "dev",
+            "ssh_key": "ssh-rsa [shortened]"
+        },
+        {
+            "user_name": "user_3",
+            "role": "read_only",
+            "ssh_key": "ssh-rsa [shortened]"
+        },
+        {
+            "user_name": "user_4",
+            "role": "dev",
+            "ssh_key": "ssh-rsa [shortened]"
+        }
+    ]
+}
