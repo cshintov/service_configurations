@@ -32,9 +32,23 @@ locals {
 }
 
 locals {
-  config_strings = flatten([
+  configs = [
     for service in local.services.service_configuration: [
       for collection in service.mongoCollection: [
+          service.serviceName, 
+          service.mongoCluster, 
+          service.mongoDatabase, 
+          service.mongoCollection[0]
+     ]
+    ]
+  ]
+}
+
+resource "local_file" "foo" {
+  for_each = local.configs
+  content  = join(', ', [
+     for service in local.services.service_configuration: [
+       for collection in service.mongoCollection: [
         format(
           "mongodb+srv://%s:${random_password.password.result}@%s/%s/%s",
           service.serviceName, 
@@ -45,11 +59,14 @@ locals {
      ]
     ]
   ])
+
+  filename = "${path.module}/foo.bar"
 }
+
 
 output "configs" {
   value = local.config_strings
-  sensitive = true
+  # sensitive = true
 }
 
 output "password" {
